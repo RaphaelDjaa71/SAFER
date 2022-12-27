@@ -34,8 +34,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[ORM\Column]
-    private ?int $contacts = null;
+    #[ORM\Column(length: 10)]
+    private ?string $contacts = null;
 
     public function getId(): ?int
     {
@@ -131,12 +131,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getContacts(): ?int
+    public function getContacts(): ?string
     {
         return $this->contacts;
     }
 
-    public function setContacts(int $contacts): self
+    public function setContacts(string $contacts): self
     {
         $this->contacts = $contacts;
 
