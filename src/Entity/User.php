@@ -37,6 +37,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 10)]
     private ?string $contacts = null;
 
+    /*
+     * Les getters permettent d'accéder aux variables et de les récupérer
+     * et les setters qui permettent de remplir la variable avec une data
+     */
     public function getId(): ?int
     {
         return $this->id;
