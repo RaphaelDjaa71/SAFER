@@ -45,7 +45,7 @@ class RegisterController extends AbstractController
              * ici on observe l'encodage du mot de passe
              */
 
-
+            // met à jour la BD via doctrine
             $this->entityManager->persist($user);
             $this->entityManager->flush();
         }
