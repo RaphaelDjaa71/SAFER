@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+#[ORM\Entity(repositoryClass: TypeRepository::class)]
+class Type
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,15 +18,11 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Biens::class)]
-    private Collection $biens;
-
-    #[ORM\OneToMany(mappedBy: 'Catégorie', targetEntity: SAFER::class)]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: SAFER::class)]
     private Collection $sAFERs;
 
     public function __construct()
     {
-        $this->biens = new ArrayCollection();
         $this->sAFERs = new ArrayCollection();
     }
 
@@ -52,36 +48,6 @@ class Category
     }
 
     /**
-     * @return Collection<int, Biens>
-     */
-    public function getBiens(): Collection
-    {
-        return $this->biens;
-    }
-
-    public function addBien(Biens $bien): self
-    {
-        if (!$this->biens->contains($bien)) {
-            $this->biens->add($bien);
-            $bien->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBien(Biens $bien): self
-    {
-        if ($this->biens->removeElement($bien)) {
-            // set the owning side to null (unless already changed)
-            if ($bien->getCategory() === $this) {
-                $bien->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, SAFER>
      */
     public function getSAFERs(): Collection
@@ -93,7 +59,7 @@ class Category
     {
         if (!$this->sAFERs->contains($sAFER)) {
             $this->sAFERs->add($sAFER);
-            $sAFER->setCategorie($this);
+            $sAFER->setType($this);
         }
 
         return $this;
@@ -103,8 +69,8 @@ class Category
     {
         if ($this->sAFERs->removeElement($sAFER)) {
             // set the owning side to null (unless already changed)
-            if ($sAFER->getCategorie() === $this) {
-                $sAFER->setCategorie(null);
+            if ($sAFER->getType() === $this) {
+                $sAFER->setType(null);
             }
         }
 
