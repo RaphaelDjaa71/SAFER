@@ -5,52 +5,72 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Nos Biens</h1>
-    <div class="row product-cont">
-    {% for bien in biens %}
-        <style>
-            .product-item .product-ref {
-                text-transform: uppercase;
-                font-size: 15px;
-                margin-top: 20px;
-                margin-bottom: 0px;
-            }
-
-            .product-item {
-                margin-top: 50px;
-            }
-
-            .product-item .product-int {
-                display: block;
-                font-size: 14px;
-                margin-bottom: 20px;
-            }
-
-            .product-item .product-prix {
-                font-size: 14px;
-                font-weight: bold;
-            }
-
-            .product-cont {
-                margin-bottom: 350px;
-            }
-
-            .img-fluid {
-                border-radius: 10px;
-            }
-
-
-
-        </style>
-        <div class="col-md-4">
-            <div class="product-item text-center">
-                <a href="{{ path('bien', {"slug" : bien.slug}) }}">
-                    <img src="/uploads/{{ bien.illustration }}" alt="{{ bien.reference }}" class="img-fluid"></a>
-                <h5 class="product-ref">{{ bien.reference }}</h5>
-                <span class="product-int">{{ bien.intitule }}</span>
-                <span class="product-prix">{{ bien.prix | number_format(2, ',','.') }} €</span>
-            </div>
+    <div class="row">
+        <div class="col-md-3">
+            <h1>Filtrer</h1>
+            {{ form(form) }}
         </div>
-    {% endfor %}
-</div>
+
+        <div class="col-md-9">
+
+        <h1>Nos Biens</h1>
+        <div class="row product-cont">
+            {% for bien in biens %}
+                <style>
+                    .product-item .product-ref {
+                        text-transform: uppercase;
+                        font-size: 15px;
+                        margin-top: 20px;
+                        margin-bottom: 0px;
+                    }
+
+                    .product-item {
+                        margin-top: 50px;
+                    }
+
+                    .product-item .product-int {
+                        display: block;
+                        font-size: 14px;
+                        margin-bottom: 20px;
+                    }
+
+                    .product-item .product-prix {
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+
+                    .product-cont {
+                        margin-bottom: 350px;
+                    }
+
+                    .img-fluid {
+                        border-radius: 10px;
+                    }
+
+                    .body {
+                        position: relative;
+                    }
+
+                    .footer-custom {
+                        text-align: center;
+                        width: 100%;
+                        background-color: #c6c8ca;
+                        position:relative;
+                        bottom:0px;  /* on le colle en bas */
+                        height:50px;   /* Hauteur du pied de page */
+                    }
+                </style>
+                <div class="col-md-4">
+                    <div class="product-item text-center">
+                        <a href="{{ path('bien', {"slug" : bien.slug}) }}">
+                            <img src="/uploads/{{ bien.illustration }}" alt="{{ bien.reference }}" class="img-fluid"></a>
+                        <h5 class="product-ref">{{ bien.reference }}</h5>
+                        <span class="product-int">{{ bien.intitule }}</span>
+                        <span class="product-prix">{{ bien.prix | number_format(2, ',','.') }} €</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
 {% endblock %}

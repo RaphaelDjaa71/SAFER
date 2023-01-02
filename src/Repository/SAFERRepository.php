@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\classe\search;
 use App\Entity\Bien;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,32 @@ class SAFERRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Requête permettant de récupérer les produits en fonction de la recherche de l'utilisateur
+     * @return Bien[]
+     */
+    public function findWithSearch (search $search)
+    {
+        $query = $this
+            ->createQueryBuilder('b')
+            ->select('c', 'b')
+            ->join('b.Categorie', 'c');
+
+        if (!empty($search->categories)){
+            $query = $query
+                ->andWhere('c.id IN (:categories)')
+                ->setParameter('categories', $search->categories);
+        }
+
+        if (!empty($search->string)){
+            $query = $query
+                ->andWhere('b.Intitule LIKE :string')
+                ->setParameter('string', "%{$search->string}%"); // recherche partielle sur search->string
+        }
+
+        return $query->getQuery()->getResult();
     }
 
 //    /**

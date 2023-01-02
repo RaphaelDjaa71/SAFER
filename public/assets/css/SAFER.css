@@ -9,19 +9,8 @@
 
 .footer-custom {
     text-align: center;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     background-color: #c6c8ca;
-    padding-top: 20px;
-}
-
-.product-item {
-
-}
-
-.product-item .product-desc {
-    text-transform: uppercase;
-    font-size: 15px;
-    margin-bottom: 10px;
+    position:absolute;
+    height:50px;   /* Hauteur du pied de page */
 }
