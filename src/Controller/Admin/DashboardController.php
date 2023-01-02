@@ -3,10 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Biens;
-use App\Entity\Category;
-use App\Entity\SAFER;
+use App\Entity\Categorie;
+use App\Entity\Bien;
 use App\Entity\Type;
-use App\Entity\User;
+use App\Entity\Utilisateur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -24,16 +24,15 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('SAFER');
+            ->setTitle('Bien');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Users', 'fas fa-user ', User::class);
-        yield MenuItem::linkToCrud('Category', 'fas fa-list ', Category::class);
-        yield MenuItem::linkToCrud('Biens', 'fas fa-house ', Biens::class);
+        yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+        yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user ', Utilisateur::class);
+        yield MenuItem::linkToCrud('Categorie', 'fas fa-list ', Categorie::class);
         yield MenuItem::linkToCrud('Type', 'fas fa-shop ', Type::class);
-        yield MenuItem::linkToCrud('SAFER', 'fas fa-house ',SAFER::class);
+        yield MenuItem::linkToCrud('Bien', 'fas fa-house ',Bien::class);
     }
 }

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Nos Biens - SAFER
+{% endblock %}
+
+{% block content %}
+    <h1>Nos Biens</h1>
+    Biens
+<div class="row">
+    {% for bien in biens %}
+        <style>
+            .product-item .product-ref {
+                text-transform: uppercase;
+                font-size: 15px;
+                margin-top: 20px;
+                margin-bottom: 0px;
+            }
+
+            .product-item {
+                margin-top: 50px;
+            }
+
+            .product-item .product-int {
+                display: block;
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .product-item .product-prix {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+
+
+        </style>
+        <div class="col-md-4">
+            <div class="product-item text-center">
+                <img src="/uploads/{{ bien.illustration }}" alt="{{ bien.reference }}" class="img-fluid">
+                <h5 class="product-ref">{{ bien.reference }}</h5>
+                <span class="product-int">{{ bien.intitule }}</span>
+                <span class="product-prix">{{ bien.prix }}</span>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

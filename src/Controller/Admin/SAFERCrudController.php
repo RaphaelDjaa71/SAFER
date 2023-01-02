@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\SAFER;
+use App\Entity\Bien;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -13,16 +13,18 @@ class SAFERCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return SAFER::class;
+        return Bien::class;
     }
 
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            ImageField::new('illustration')
-                ->setBasePath(' uploads/')
-                ->setUploadDir('public/uploads'),
+            ImageField::new ('illustration')
+                ->setBasePath('uploads')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
             TextField::new('Reference'),
             TextField::new('Intitule'),
             TextField::new('Descriptif'),

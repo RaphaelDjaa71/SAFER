@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SAFERRepository::class)]
-class SAFER
+class Bien
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -41,7 +41,7 @@ class SAFER
 
     #[ORM\ManyToOne(inversedBy: 'sAFERs')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $Categorie = null;
+    private ?Categorie $Categorie = null;
 
     public function getId(): ?int
     {
@@ -144,12 +144,12 @@ class SAFER
         return $this;
     }
 
-    public function getCategorie(): ?Category
+    public function getCategorie(): ?Categorie
     {
         return $this->Categorie;
     }
 
-    public function setCategorie(?Category $Categorie): self
+    public function setCategorie(?Categorie $Categorie): self
     {
         $this->Categorie = $Categorie;
 

@@ -18,7 +18,7 @@ class Type
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: SAFER::class)]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Bien::class)]
     private Collection $sAFERs;
 
     public function __construct()
@@ -48,14 +48,14 @@ class Type
     }
 
     /**
-     * @return Collection<int, SAFER>
+     * @return Collection<int, Bien>
      */
     public function getSAFERs(): Collection
     {
         return $this->sAFERs;
     }
 
-    public function addSAFER(SAFER $sAFER): self
+    public function addSAFER(Bien $sAFER): self
     {
         if (!$this->sAFERs->contains($sAFER)) {
             $this->sAFERs->add($sAFER);
@@ -65,7 +65,7 @@ class Type
         return $this;
     }
 
-    public function removeSAFER(SAFER $sAFER): self
+    public function removeSAFER(Bien $sAFER): self
     {
         if ($this->sAFERs->removeElement($sAFER)) {
             // set the owning side to null (unless already changed)

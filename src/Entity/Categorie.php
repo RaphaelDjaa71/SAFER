@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+class Categorie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,15 +18,11 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Biens::class)]
-    private Collection $biens;
-
-    #[ORM\OneToMany(mappedBy: 'Catégorie', targetEntity: SAFER::class)]
+    #[ORM\OneToMany(mappedBy: 'Catégorie', targetEntity: Bien::class)]
     private Collection $sAFERs;
 
     public function __construct()
     {
-        $this->biens = new ArrayCollection();
         $this->sAFERs = new ArrayCollection();
     }
 
@@ -52,44 +48,14 @@ class Category
     }
 
     /**
-     * @return Collection<int, Biens>
-     */
-    public function getBiens(): Collection
-    {
-        return $this->biens;
-    }
-
-    public function addBien(Biens $bien): self
-    {
-        if (!$this->biens->contains($bien)) {
-            $this->biens->add($bien);
-            $bien->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBien(Biens $bien): self
-    {
-        if ($this->biens->removeElement($bien)) {
-            // set the owning side to null (unless already changed)
-            if ($bien->getCategory() === $this) {
-                $bien->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, SAFER>
+     * @return Collection<int, Bien>
      */
     public function getSAFERs(): Collection
     {
         return $this->sAFERs;
     }
 
-    public function addSAFER(SAFER $sAFER): self
+    public function addSAFER(Bien $sAFER): self
     {
         if (!$this->sAFERs->contains($sAFER)) {
             $this->sAFERs->add($sAFER);
@@ -99,7 +65,7 @@ class Category
         return $this;
     }
 
-    public function removeSAFER(SAFER $sAFER): self
+    public function removeSAFER(Bien $sAFER): self
     {
         if ($this->sAFERs->removeElement($sAFER)) {
             // set the owning side to null (unless already changed)
