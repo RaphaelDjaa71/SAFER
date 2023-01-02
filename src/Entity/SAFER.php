@@ -43,6 +43,10 @@ class SAFER
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $Categorie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sAFERs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Biens $biens = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -152,6 +156,18 @@ class SAFER
     public function setCategorie(?Category $Categorie): self
     {
         $this->Categorie = $Categorie;
+
+        return $this;
+    }
+
+    public function getBiens(): ?Biens
+    {
+        return $this->biens;
+    }
+
+    public function setBiens(?Biens $biens): self
+    {
+        $this->biens = $biens;
 
         return $this;
     }
