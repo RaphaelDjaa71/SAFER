@@ -1,10 +1,15 @@
+.body {
+    position: relative;
+}
+
+
 .navbar-item-custom a {
     color: #FFFFFF;
 }
 
 .footer-custom {
     text-align: center;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     background-color: #c6c8ca;

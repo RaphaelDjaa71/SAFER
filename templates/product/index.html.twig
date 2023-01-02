@@ -6,8 +6,7 @@
 
 {% block content %}
     <h1>Nos Biens</h1>
-    Biens
-<div class="row">
+    <div class="row product-cont">
     {% for bien in biens %}
         <style>
             .product-item .product-ref {
@@ -32,16 +31,24 @@
                 font-weight: bold;
             }
 
+            .product-cont {
+                margin-bottom: 350px;
+            }
+
+            .img-fluid {
+                border-radius: 10px;
+            }
+
 
 
         </style>
         <div class="col-md-4">
             <div class="product-item text-center">
-                <img src="/uploads/{{ bien.illustration }}" alt="{{ bien.reference }}" class="img-fluid">
+                <a href="{{ path('bien', {"slug" : bien.slug}) }}">
+                    <img src="/uploads/{{ bien.illustration }}" alt="{{ bien.reference }}" class="img-fluid"></a>
                 <h5 class="product-ref">{{ bien.reference }}</h5>
                 <span class="product-int">{{ bien.intitule }}</span>
-                <span class="product-prix">{{ bien.prix }}</span>
-
+                <span class="product-prix">{{ bien.prix | number_format(2, ',','.') }} €</span>
             </div>
         </div>
     {% endfor %}

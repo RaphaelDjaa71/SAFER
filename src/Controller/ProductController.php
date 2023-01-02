@@ -17,13 +17,27 @@ class ProductController extends AbstractController
         $this->entitymanager = $entityManager;
     }
 
-    #[Route('/nos-biens', name: 'biens')]
+    #[Route('/biens', name: 'biens')]
     public function index(): Response
     {
         $biens = $this->entitymanager->getRepository(Bien::class)->findAll();
 
         return $this->render('product/index.html.twig',[
             'biens' => $biens
+        ]);
+    }
+
+    #[Route('/bien/{slug} ', name: 'bien')]
+    public function show($slug): Response
+    {
+        $bien = $this->entitymanager->getRepository(Bien::class)->findOneBySlug($slug);
+
+        if (!$bien){
+            return $this->redirectToRoute('biens');
+        }
+
+        return $this->render('product/show.html.twig',[
+            'bien' => $bien
         ]);
     }
 }

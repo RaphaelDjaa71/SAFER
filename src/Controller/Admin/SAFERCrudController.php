@@ -6,6 +6,7 @@ use App\Entity\Bien;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -25,6 +26,7 @@ class SAFERCrudController extends AbstractCrudController
                 ->setUploadDir('public/uploads')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
+            SlugField::new('slug')->setTargetFieldName('Reference'),
             TextField::new('Reference'),
             TextField::new('Intitule'),
             TextField::new('Descriptif'),

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ bien.intitule }} - SAFER
+{% endblock %}
+
+{% block content %}
+    <style>
+        .price-page {
+            font-size: 25px;
+        }
+        .img-fluid {
+            border-radius: 10px;
+        }
+        .product-desc {
+            font-weight: lighter;
+        }
+
+
+    </style>
+    <div class="row">
+        <div class="col-md-4 my-auto">
+            <img src="/uploads/{{ bien.illustration }}" alt="{{ bien.reference }}" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+            <h2>{{ bien.intitule }} | {{ bien.reference }}</h2>
+            <h3 class="product-desc">{{ bien.descriptif }}</h3>
+            <span class="price-page">{{ bien.prix | number_format(2, ',','.') }} €</span>
+            <hr>
+            <a href="" class="btn btn-primary">Mettre en favori</a>
+        </div>
+    </div>
+{% endblock %}

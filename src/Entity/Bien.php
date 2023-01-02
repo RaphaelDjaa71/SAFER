@@ -43,6 +43,9 @@ class Bien
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $Categorie = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -152,6 +155,18 @@ class Bien
     public function setCategorie(?Categorie $Categorie): self
     {
         $this->Categorie = $Categorie;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
