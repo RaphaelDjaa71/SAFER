@@ -1,5 +1,5 @@
 .body {
-    position: relative;
+    position: fixed;
 }
 
 
@@ -8,9 +8,12 @@
 }
 
 .footer-custom {
+    position: absolute;
     text-align: center;
+    bottom: 0;
     width: 100%;
     background-color: #c6c8ca;
-    position:absolute;
-    height:50px;   /* Hauteur du pied de page */
+    padding-top: 30px;
+    padding-bottom: 13px;
+    margin-bottom: -50px;
 }
