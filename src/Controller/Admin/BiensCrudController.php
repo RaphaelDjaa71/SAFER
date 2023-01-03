@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Biens;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -26,8 +26,10 @@ class BiensCrudController extends AbstractCrudController
             TextField::new('title'),
             //SlugField::new('slug')->setTargetFieldName('title'),
             ImageField::new('illustration')
-                ->setBasePath(' uploads/')
-                ->setUploadDir('public/uploads'),
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
             TextField::new('number'),
             TextareaField::new('description'),
             TextField::new('ville'),

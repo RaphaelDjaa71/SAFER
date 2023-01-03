@@ -8,5 +8,30 @@
     bottom: 0;
     width: 100%;
     background-color: #c6c8ca;
-    padding-top: 20px;
+    padding-top: 10px;
+}
+
+.Biens-item h5{
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.Biens-item {
+    margin-top: 40px;
+}
+
+.Biens-item .Biens-description {
+    font-size: 10px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.Biens-item .Biens-price {
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.Biens-container{
+    margin-bottom: 125px;
 }
