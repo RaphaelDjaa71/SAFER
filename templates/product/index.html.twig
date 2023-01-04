@@ -15,49 +15,39 @@
 
         <h1>Nos Biens</h1>
         <div class="row product-cont">
+            <style>
+                .product-item .product-ref {
+                    text-transform: uppercase;
+                    font-size: 15px;
+                    margin-top: 20px;
+                    margin-bottom: 0px;
+                }
+
+                .product-item {
+                    margin-top: 50px;
+                }
+
+                .product-item .product-int {
+                    display: block;
+                    font-size: 14px;
+                    margin-bottom: 20px;
+                }
+
+                .product-item .product-prix {
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+
+                .product-cont {
+                    margin-bottom: 350px;
+                }
+
+                .img-fluid {
+                    border-radius: 10px;
+                }
+
+            </style>
             {% for bien in biens %}
-                <style>
-                    .product-item .product-ref {
-                        text-transform: uppercase;
-                        font-size: 15px;
-                        margin-top: 20px;
-                        margin-bottom: 0px;
-                    }
-
-                    .product-item {
-                        margin-top: 50px;
-                    }
-
-                    .product-item .product-int {
-                        display: block;
-                        font-size: 14px;
-                        margin-bottom: 20px;
-                    }
-
-                    .product-item .product-prix {
-                        font-size: 14px;
-                        font-weight: bold;
-                    }
-
-                    .product-cont {
-                        margin-bottom: 350px;
-                    }
-
-                    .img-fluid {
-                        border-radius: 10px;
-                    }
-
-                    .footer-custom {
-                        text-align: center;
-                        width: 100%;
-                        background-color: #c6c8ca;
-                        position:absolute;
-                        height:100px;   /* Hauteur du pied de page */
-                        padding-top: 15px;
-                        padding-bottom: 13px;
-                        margin-bottom: 0px;
-                    }
-                </style>
                 <div class="col-md-4">
                     <div class="product-item text-center">
                         <a href="{{ path('bien', {"slug" : bien.slug}) }}">

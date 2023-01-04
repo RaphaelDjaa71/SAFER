@@ -16,16 +16,6 @@
             font-weight: lighter;
         }
 
-        .footer-custom {
-            text-align: center;
-            background-color: #c6c8ca;
-            position:absolute;
-            bottom:0px;  /* on le colle en bas */
-            padding-top: 15px;
-            padding-bottom: 13px;
-            margin-bottom: 0px;
-        }
-
 
     </style>
     <div class="row">
@@ -37,7 +27,7 @@
             <h3 class="product-desc">{{ bien.descriptif }}</h3>
             <span class="price-page">{{ bien.prix | number_format(2, ',','.') }} €</span>
             <hr>
-            <a href="" class="btn btn-primary">Mettre en favori</a>
+            <a href="{{ path('add_to_cart', {'id':bien.id}) }}" class="btn btn-primary">Mettre en favori</a>
         </div>
     </div>
 {% endblock %}
