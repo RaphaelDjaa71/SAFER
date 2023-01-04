@@ -31,7 +31,7 @@ class BiensController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()){ /*formulaire soumit et valide*/
             $biens = $this->entityManager->getRepository(Biens::class)->findWithSearch($search);
         }
 

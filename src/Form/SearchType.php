@@ -13,6 +13,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchType extends AbstractType
 {
+
+    /*
+    Creation de notre formulaire avec 3 entrées string pour la recherche et categories qui represente la selection d'une categorie
+    EntityType lier une entrée  input une propriete de notre formulaire  representation d'une entité avec une clé class dans notre tableau en lui precisant avec quelle classe
+    */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -41,6 +46,7 @@ class SearchType extends AbstractType
 
     /*
     *Configurer des options
+    *liaison de data class et Search class
     */
     public function configureOptions(OptionsResolver $resolver): void
     {
