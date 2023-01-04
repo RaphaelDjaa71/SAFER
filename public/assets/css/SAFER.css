@@ -4,34 +4,39 @@
 
 .footer-custom {
     text-align: center;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     background-color: #c6c8ca;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 .Biens-item h5{
     text-transform: uppercase;
-    font-size: 10px;
-    margin-bottom: 5px;
+    font-size: 15px;
+    margin-bottom: 1px;
 }
 
 .Biens-item {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .Biens-item .Biens-description {
-    font-size: 10px;
+    font-size: 14px;
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .Biens-item .Biens-price {
     font-size: 15px;
-    font-weight: 100;
+    font-weight: bold;
 }
 
 .Biens-container{
-    margin-bottom: 125px;
+    margin-bottom: 200px;
+}
+
+.bien-page-price{
+    font-width: bold;
+    font-size: 19px;
 }

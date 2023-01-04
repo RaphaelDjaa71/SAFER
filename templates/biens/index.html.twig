@@ -3,18 +3,26 @@
 {% block title %}Nos biens - SAFER{% endblock %}
 
 {% block content %}
-    <h1>Nos biens immobilers</h1>
-
     <div class="row">
-        {% for Biens in biens %}
-            <div class="col-md-4">
-                <div class="Biens-item text-center">
-                    <img src="{{ asset('/uploads/'~ Biens.illustration) }}" alt="{{ Biens.title }}" class="img-fluid">
-                    <h5>{{ Biens.title }}</h5>
-                    <span class="Biens.description">{{ Biens.description }}</span>
-                    <br><span class="Biens.price">{{ (Biens.price / 100)|number_format(2) }}€</span><br>
-                </div>
-            </div>
-        {% endfor %}
+        <div class="col-md-3">
+            <h3>CATEGORIES</h3>
+            {{ form(form) }}
+        </div>
+        <div class="col-md-9">
+            <h3>NOS BIENS IMMOBILIERS</h3>
+
+            <div class="row bien-container">
+                {% for Biens in biens %}
+                    <div class="col-md-4">
+                        <div class="Biens-item text-center">
+                            <a href="{{ path( 'bien', {'title' : Biens.title } ) }}"><img src="{{ asset('/uploads/'~ Biens.illustration) }}" alt="{{ Biens.title }}" class="img-fluid"></a>
+                            <h5>{{ Biens.title }}</h5>
+                            <span class="Biens.description">{{ Biens.description }}</span>
+                            <span class="Biens.price">{{ (Biens.price / 100)|number_format(2, ',','.') }} €</span>
+                        </div>
+                    </div>
+                {% endfor %}
+             </div>
+        </div>
     </div>
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ bien.title }} - SAFER{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <img src="/uploads/{{ bien.illustration }} " alt="{{ bien.title }}" class= "img-fluid">
+        </div>
+        <div class="col-md-6 my-auto">
+            <h3>{{bien.title }}</h3>
+            <p>{{ bien.category}} ({{bien.codepostal }},{{bien.ville}})</p>
+            <span class="bien-page-price">{{(bien.price / 100)|number_format(2, ',','.') }} € </span>
+            <hr>
+            <p>
+                {{ bien.description}}
+                <p>
+                {{bien.surface}}Ha
+                </p>
+                <a href="" class="btn btn-primary" role="button">Ajouter aux favoris</a>
+                <a href="" class="btn btn-primary" role="button">Ajouter au panier</a>
+            </p>
+        </div>
+    
+    </div>
+{% endblock %}

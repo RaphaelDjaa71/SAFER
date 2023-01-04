@@ -2,9 +2,14 @@
 
 namespace App\Repository;
 
+use App\Classe\Search;
 use App\Entity\Biens;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use function Symfony\Component\String\b;
+use function Symfony\Component\String\c;
 
 /**
  * @extends ServiceEntityRepository<Biens>
@@ -37,6 +42,31 @@ class BiensRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+
+     * @param Search $search
+     * @return Biens[]
+     * Rêquete qui me permet de recuperer les produits en fonction de la recherche de l'utilisateur
+     */
+    public function findWithSearch(Search $search){
+        $query = $this
+            ->createQueryBuilder('b')
+            ->select('c', 'b')
+            ->join('b.Category', 'c');
+        
+        if(!empty($search->Categories)) {
+            $query = $query
+                ->andWhere('c.id IN (:categories)')
+                ->setParameter('categories', $search->Categories);
+        }
+        if(!empty($search->string)) {
+            $query = $query
+                ->andWhere('b.title LIKE :string')
+                ->setParameter('string', "%{$search->string}%" );
+        }
+        return $query->getQuery()->getResult();
     }
 
 //    /**
