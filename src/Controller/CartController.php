@@ -46,7 +46,6 @@ class CartController extends AbstractController
         $cart =  $session->get('cart', []);
         $cart[$id] = 1;
         $session->set('cart', $cart);
-        dd($session->get('cart'));
 
         return $this->redirectToRoute('cart');
 
@@ -63,6 +62,6 @@ class CartController extends AbstractController
 
         $session->set('cart', $cart);
 
-        return $this->redirectToRoute('biens');
+        return $this->redirectToRoute('cart');
     }
 }
