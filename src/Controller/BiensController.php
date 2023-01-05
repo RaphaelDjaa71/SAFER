@@ -53,7 +53,7 @@ class BiensController extends AbstractController
             return $this->redirectToRoute('biens');
         }
         return $this->render('biens/show.html.twig', [
-            'bien' => $bien
+            'bien' => $bien,
         ]);
 
     }

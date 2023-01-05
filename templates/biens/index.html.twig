@@ -14,12 +14,7 @@
             <div class="row bien-container">
                 {% for Biens in biens %}
                     <div class="col-md-4">
-                        <div class="Biens-item text-center">
-                            <a href="{{ path( 'bien', {'title' : Biens.title } ) }}"><img src="{{ asset('/uploads/'~ Biens.illustration) }}" alt="{{ Biens.title }}" class="img-fluid"></a>
-                            <h5>{{ Biens.title }}</h5>
-                            <span class="Biens.description">{{ Biens.description }}</span>
-                            <span class="Biens.price">{{ (Biens.price / 100)|number_format(2, ',','.') }} €</span>
-                        </div>
+                        {% include 'Biens/single_bien.html.twig' %}
                     </div>
                 {% endfor %}
              </div>

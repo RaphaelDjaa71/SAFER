@@ -44,6 +44,9 @@ class Biens
     #[ORM\Column(length: 255)]
     private ?string $illustration = null;
 
+    #[ORM\Column]
+    private ?bool $isBest = null;
+
     public function __construct()
     {
         $this->SAFER = new ArrayCollection();
@@ -158,6 +161,18 @@ class Biens
     public function setIllustration(string $illustration): self
     {
         $this->illustration = $illustration;
+
+        return $this;
+    }
+
+    public function isIsBest(): ?bool
+    {
+        return $this->isBest;
+    }
+
+    public function setIsBest(bool $isBest): self
+    {
+        $this->isBest = $isBest;
 
         return $this;
     }

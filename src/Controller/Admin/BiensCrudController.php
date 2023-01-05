@@ -34,6 +34,7 @@ class BiensCrudController extends AbstractCrudController
             TextareaField::new('description'),
             TextField::new('ville'),
             TextField::new('codepostal'),
+            BooleanField::new('isBest'),
             MoneyField::new('price')->setCurrency('EUR'),
             NumberField::new('surface'),
             AssociationField::new('Category'),

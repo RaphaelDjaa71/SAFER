@@ -1,5 +1,8 @@
+body{
+    position: relative;
+}
 .navbar-item-custom a {
-    color: #FFFFFF;
+    color: #1f9349;
 }
 
 .footer-custom {
@@ -7,8 +10,8 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: #c6c8ca;
-    padding-top: 15px;
+    background-color: #fd7e14;
+    padding-top: 20px;
 }
 
 .Biens-item h5{
@@ -24,7 +27,7 @@
 .Biens-item .Biens-description {
     font-size: 14px;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .Biens-item .Biens-price {
@@ -33,10 +36,10 @@
 }
 
 .Biens-container{
-    margin-bottom: 200px;
+    margin-bottom: 150px;
 }
 
 .bien-page-price{
-    font-width: bold;
+    font-weight: bold;
     font-size: 19px;
 }
