@@ -29,8 +29,13 @@ class CartController extends AbstractController
         $cart = $session->get('cart',[]);
 
         foreach ($cart as $id => $quantity) {
+            $objet_bien = $this->entityManager->getRepository(bien::class)->findOneById($id);
+            if (!$objet_bien){
+                $this->remove($id,$session);
+                continue;
+            }
             $cartComplete[] = [
-                'bien' => $this->entityManager->getRepository(bien::class)->findOneById($id),
+                'bien' => $objet_bien,
                 'quantity' => $quantity
             ];
         }

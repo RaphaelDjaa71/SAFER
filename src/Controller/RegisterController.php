@@ -34,7 +34,7 @@ class RegisterController extends AbstractController
 
             /*
              * la methode hashPassword permet d'encoder les mots de passe et donc de ne pas les stocker en clair
-             * dans notre base de donnée ( Pour plus de sécurité )
+             * dans notre base de donnée (Pour plus de sécurité)
              */
 
             $password = $hasher->hashPassword($user,$user->getPassword());

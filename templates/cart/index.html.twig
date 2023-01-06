@@ -1,48 +1,52 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
-{% block title %}Mes favoris - SAFER{% endblock %}
+    {% block title %}Mes favoris - SAFER{% endblock %}
 
-{% block content %}
-    <h1>Mes Favoris</h1>
-    Retrouvez vos biens favoris
-    <table class="table mt-3">
-        <thead>
-        <tr>
-            <th scope="col">Aperçu</th>
-            <th scope="col">Référence</th>
-            <th scope="col">Intitulé</th>
-            <th scope="col">Descriptif</th>
-            <th scope="col">Localisation</th>
-            <th scope="col">Surface</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Type</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for bien in cart %}
-        <tr>
-            <td><img src="/uploads/{{ bien.bien.illustration }}" alt="{{ bien.bien.reference }}" height="15px" class="img-fluid"></td>
-            <td>{{ bien.bien.reference }}</td>
-            <td>{{ bien.bien.intitule }}</td>
-            <td>{{ bien.bien.descriptif }}</td>
-            <td>{{ bien.bien.localisation }}</td>
-            <td>{{ bien.bien.surface }}</td>
-            <td>{{ bien.bien.prix | number_format(2, ',','.') }} €</td>
-            <td>{{ bien.bien.type }}</td>
-            <td>{{ bien.bien.categorie }}</td>
-            <td>
-                <a href="{{ path('remove_my_cart', {'id' : bien.bien.id}) }}">
-                    <img src="{{ asset('assets/img/trash-solid.svg') }}" height="25px" alt="supprimer un bien">
-                </a>
-            </td>
-
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div>
-        <a href="" class="btn btn-success btn-block mt-4">Envoi par mail</a>
-    </div>
-{% endblock %}
+    {% block content %}
+        <h1>Mes Favoris</h1>
+        {% if cart|length > 0 %}
+            Retrouvez vos biens favoris
+        <table class="table mt-3">
+            <thead>
+            <tr>
+                <th scope="col">Aperçu</th>
+                <th scope="col">Référence</th>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Descriptif</th>
+                <th scope="col">Localisation</th>
+                <th scope="col">Surface</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Type</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for bien in cart %}
+            <tr>
+                <td><img src="/uploads/{{ bien.bien.illustration }}" alt="{{ bien.bien.reference }}" height="15px" class="img-fluid"></td>
+                <td>{{ bien.bien.reference }}</td>
+                <td>{{ bien.bien.intitule }}</td>
+                <td>{{ bien.bien.descriptif }}</td>
+                <td>{{ bien.bien.localisation }}</td>
+                <td>{{ bien.bien.surface }}</td>
+                <td>{{ bien.bien.prix | number_format(2, ',','.') }} €</td>
+                <td>{{ bien.bien.type }}</td>
+                <td>{{ bien.bien.categorie }}</td>
+                <td>
+                    <a href="{{ path('remove_my_cart', {'id' : bien.bien.id}) }}">
+                        <img src="{{ asset('assets/img/trash-solid.svg') }}" height="25px" alt="supprimer un bien">
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <a href="" class="btn btn-success btn-block mt-4">Envoi par mail</a>
+        </div>
+        {% else  %}
+        <hr>
+        <p><b>Votre liste de favori est vide !</b></p>
+        {% endif %}
+    {% endblock %}
