@@ -35,7 +35,7 @@ class RegisterController extends AbstractController
 
             $user = $form->getData();
             /*verifier si l'utilisateur n'esxite pas en base de donnée*/
-            $search_email = this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
             if (!$search_email) {
                 /*
                  * la methode hashPassword permet d'encoder les mots de passe et donc de ne pas les stocker en clair
