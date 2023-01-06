@@ -32,7 +32,7 @@ class Biens
     private ?string $codepostal = null;
 
     #[ORM\Column]
-    private ?float $price = null;
+    private ?string $price = null;
 
     #[ORM\Column]
     private ?float $surface = null;
@@ -44,8 +44,6 @@ class Biens
     #[ORM\Column(length: 255)]
     private ?string $illustration = null;
 
-    #[ORM\Column]
-    private ?bool $isBest = null;
 
     public function __construct()
     {
@@ -117,12 +115,12 @@ class Biens
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setPrice(string $price): self
     {
         $this->price = $price;
 
@@ -161,18 +159,6 @@ class Biens
     public function setIllustration(string $illustration): self
     {
         $this->illustration = $illustration;
-
-        return $this;
-    }
-
-    public function isIsBest(): ?bool
-    {
-        return $this->isBest;
-    }
-
-    public function setIsBest(bool $isBest): self
-    {
-        $this->isBest = $isBest;
 
         return $this;
     }
