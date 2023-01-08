@@ -5,6 +5,8 @@ namespace App\Form;
 // Importation de classes et d'interfaces
 use App\classe\search;
 use App\Entity\Categorie;
+use App\Entity\Type;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,9 +37,16 @@ class SearchType extends AbstractType
                 'multiple' => true,
                 'expanded' => true
             ])
+            ->add('types',EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => Type::class,
+                'multiple' => true,
+                'expanded' => true
+            ])
             // Ajout d'un bouton de soumission au formulaire en cours de construction
             ->add('submit', SubmitType::class, [
-                'label' => 'Filtrer',
+                'label' => 'Rechercher',
                 'attr' => [
                     'class' => 'btn-block btn-info'
                 ]

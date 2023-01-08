@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FullCategoryController!{% endblock %}
+
+{% block content %}
+    <h1>Catégories</h1>
+    les différentes catégories de biens :
+    <div class="row">
+        <div class="col-md-9">
+            <hr>
+            {% for categorie in categories %}
+                <a href="{{ path('Prairie',{'id':categorie.id}) }}">{{ categorie.getName }}</a>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

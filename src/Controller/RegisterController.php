@@ -30,6 +30,7 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
 
+            $this->addFlash('notice', 'Votre inscription a bien été prise en compte');
             $user = $form->getData();
 
             /*

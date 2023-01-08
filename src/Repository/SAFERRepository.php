@@ -48,13 +48,20 @@ class SAFERRepository extends ServiceEntityRepository
     {
         $query = $this
             ->createQueryBuilder('b')
-            ->select('c', 'b')
-            ->join('b.Categorie', 'c');
+            ->select('c','t', 'b')
+            ->join('b.Categorie', 'c')
+            ->join('b.type', 't');
 
         if (!empty($search->categories)){
             $query = $query
                 ->andWhere('c.id IN (:categories)')
                 ->setParameter('categories', $search->categories);
+        }
+
+        if (!empty($search->types)){
+            $query = $query
+                ->andWhere('t.id IN (:type)')
+                ->setParameter('type', $search->types);
         }
 
         if (!empty($search->string)){
@@ -65,6 +72,7 @@ class SAFERRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
 
 //    /**
 //     * @return Bien[] Returns an array of Bien objects

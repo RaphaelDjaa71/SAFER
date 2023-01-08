@@ -88,7 +88,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
             // dans notre base de donnée.
 
             ->add('submit', SubmitType::class, [
-                'label' => "S'inscrire"
+                'label' => "S'inscrire",
+                'attr' => [
+                    'class' => 'btn-block btn-success'
+                ]
                 ])
         ;
     }
