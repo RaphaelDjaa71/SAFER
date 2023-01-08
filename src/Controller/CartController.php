@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\classe\Cart;
 use App\Entity\Bien;
+use App\Services\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +39,7 @@ class CartController extends AbstractController
                 'quantity' => $quantity
             ];
         }
+
 
         return $this->render('cart/index.html.twig', [
             'cart' => $cartComplete

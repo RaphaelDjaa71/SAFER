@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,6 +38,14 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $contacts = null;
+
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Favori::class)]
+    private Collection $favoris;
+
+    public function __construct()
+    {
+        $this->favoris = new ArrayCollection();
+    }
 
     /*
      * Les getters permettent d'accéder aux variables et de les récupérer
@@ -143,6 +153,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setContacts(string $contacts): self
     {
         $this->contacts = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favori>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favori $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+            $favori->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favori $favori): self
+    {
+        if ($this->favoris->removeElement($favori)) {
+            // set the owning side to null (unless already changed)
+            if ($favori->getUtilisateur() === $this) {
+                $favori->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

@@ -7,6 +7,9 @@
     Bienvenue {{ app.user.firstname }} dans votre compte SAFER<br/>
     C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personelles.
     <hr>
+    {% if is_granted('ROLE_ADMIN') %}
+        - <a href="/admin">Accéder à la partie Administrateur</a><br>
+    {% endif %}
     - <a href="{{ path('biens') }}">Consulter les biens</a><br>
     - <a href="{{ path('app_account_password') }}"> Modifier mon mot de passe </a><br>
     - <a href="{{ path('cart') }}">Consulter mes favoris</a><br>

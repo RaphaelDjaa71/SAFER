@@ -3,10 +3,11 @@
 {% block content %}
     <h1>Inscription</h1>
     <p>Pour créer un nouveau compte</p>
-    <hr>
-    {% for message in app.flashes('notice')%}
-        <div class="alert alert-info">{{ message }}</div>
-    {% endfor %}
-    <hr>
+
+    {% if notification %}
+        <div class="alert alert-info">{{ notification }}</div>
+        <hr>
+    {% endif %}
+
     {{ form(form) }}
 {% endblock %}

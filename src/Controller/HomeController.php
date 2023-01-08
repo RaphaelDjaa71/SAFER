@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\classe\Mail;
 use App\Entity\Bien;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

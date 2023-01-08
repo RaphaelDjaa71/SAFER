@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\classe\Mail;
 use App\Entity\Utilisateur;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,34 +26,47 @@ class RegisterController extends AbstractController
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegisterType::class, $user);
+        $notification = null;
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
 
-            $this->addFlash('notice', 'Votre inscription a bien été prise en compte');
             $user = $form->getData();
+            $search_email = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['email'=>$user->getEmail()]);
 
-            /*
-             * la methode hashPassword permet d'encoder les mots de passe et donc de ne pas les stocker en clair
-             * dans notre base de donnée (Pour plus de sécurité)
-             */
+            if (!$search_email) {
+                /*
+                * la methode hashPassword permet d'encoder les mots de passe et donc de ne pas les stocker en clair
+                 * dans notre base de donnée (Pour plus de sécurité)
+                */
 
-            $password = $hasher->hashPassword($user,$user->getPassword());
-            $user->setPassword($password);
+                $password = $hasher->hashPassword($user,$user->getPassword());
+                $user->setPassword($password);
 
-            /*
-             * dd() permet de debuger une variable pour voir ce qui s'y passe
-             * ici on observe l'encodage du mot de passe
-             */
+                /*
+                 * dd() permet de debuger une variable pour voir ce qui s'y passe
+                 * ici on observe l'encodage du mot de passe
+                 */
 
-            // met à jour la BD via doctrine
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+                // met à jour la BD via doctrine
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+
+                $mail = new Mail();
+                $content = "Bonjour ".$user->getFirstname(). " Bienvenue chez nous, choisissez le bien qui correspond à vos attentes";
+                $mail->send($user->getEmail(), $user->getFirstname(),'Bienvenue sur le site de la SAFER',$content);
+                $notification = "Votre inscription a été prise en compte avec succès !";
+
+            } else {
+                $notification = "L'email existe déjà, veuillez en choisir un autre !";
+            }
         }
 
         return $this->render('register/index.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'notification' => $notification
         ]);
     }
 }

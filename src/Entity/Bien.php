@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SAFERRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,6 +47,14 @@ class Bien
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\OneToMany(mappedBy: 'Bien', targetEntity: Favori::class)]
+    private Collection $favoris;
+
+    public function __construct()
+    {
+        $this->favoris = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -167,6 +177,36 @@ class Bien
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favori>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favori $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+            $favori->setBien($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favori $favori): self
+    {
+        if ($this->favoris->removeElement($favori)) {
+            // set the owning side to null (unless already changed)
+            if ($favori->getBien() === $this) {
+                $favori->setBien(null);
+            }
+        }
 
         return $this;
     }
