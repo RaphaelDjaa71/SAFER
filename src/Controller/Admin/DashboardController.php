@@ -35,6 +35,7 @@ class DashboardController extends AbstractDashboardController
     {
         // Ajoute un lien vers le tableau de bord dans le menu de l'interface d'administration
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+
         // Ajoute un lien vers la gestion des utilisateurs dans le menu de l'interface d'administration
         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user ', Utilisateur::class);
 
