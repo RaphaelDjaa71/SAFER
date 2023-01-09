@@ -30,10 +30,10 @@ class RegisterController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $user = $form->getData();
-            $search_email = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['email'=>$user->getEmail()]);
+            $search_email = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $user->getEmail()]);
 
             if (!$search_email) {
                 /*
@@ -41,7 +41,7 @@ class RegisterController extends AbstractController
                  * dans notre base de donnée (Pour plus de sécurité)
                 */
 
-                $password = $hasher->hashPassword($user,$user->getPassword());
+                $password = $hasher->hashPassword($user, $user->getPassword());
                 $user->setPassword($password);
 
                 /*
@@ -54,19 +54,27 @@ class RegisterController extends AbstractController
                 $this->entityManager->flush();
 
 
+                // Crée un nouvel objet Mail
                 $mail = new Mail();
-                $content = "Bonjour ".$user->getFirstname(). " Bienvenue chez nous, choisissez le bien qui correspond à vos attentes";
-                $mail->send($user->getEmail(), $user->getFirstname(),'Bienvenue sur le site de la SAFER',$content);
+
+                // Crée le contenu du message de bienvenue
+                $content = "Bonjour " . $user->getFirstname() . " Bienvenue chez nous, choisissez le bien qui correspond à vos attentes";
+
+                // Envoie un email de bienvenue à l'utilisateur en utilisant l'objet Mail
+                $mail->send($user->getEmail(), $user->getFirstname(), 'Bienvenue sur le site de la SAFER', $content);
+
+                // Affiche un message de confirmation à l'utilisateur
                 $notification = "Votre inscription a été prise en compte avec succès !";
 
+                // Si l'email existe déjà en base de données, affiche un message d'erreur à l'utilisateur
             } else {
                 $notification = "L'email existe déjà, veuillez en choisir un autre !";
             }
         }
-
-        return $this->render('register/index.html.twig',[
-            'form' => $form->createView(),
-            'notification' => $notification
-        ]);
-    }
+            // Affiche la vue Twig register/index.html.twig en lui passant en argument le formulaire d'inscription et le message de notification
+            return $this->render('register/index.html.twig', [
+                'form' => $form->createView(),
+                'notification' => $notification
+            ]);
+        }
 }

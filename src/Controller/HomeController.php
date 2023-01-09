@@ -30,6 +30,7 @@ class HomeController extends AbstractController
         // prend les 3 premiers biens de la liste mélangée
         $randomBiens = array_slice($biens, 0, 3);
 
+        // Affiche la vue Twig home/index.html.twig en lui passant en argument le nom du contrôleur et la liste des biens choisis aléatoirement
         return $this->render('home/index.html.twig',[
             'ControllerName' => 'HomeController',
             'randomBiens' => $randomBiens

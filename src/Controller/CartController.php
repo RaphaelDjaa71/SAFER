@@ -22,7 +22,6 @@ class CartController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-
     #[Route('/mes-favoris', name: 'cart')]
     public function index(SessionInterface $session): Response
     {
@@ -33,28 +32,40 @@ class CartController extends AbstractController
         $email = $user->getEmail();
         $firstname = $user->getFirstname();
 
+        // Initialise un tableau vide qui va contenir les biens ajoutés au panier
         $cartComplete = [];
+
+        // Récupère les biens du panier à partir de la session de l'utilisateur
         $cart = $session->get('cart',[]);
 
+        // Pour chaque bien du panier, récupère l'objet Bien correspondant à partir de la base de données
         foreach ($cart as $id => $quantity) {
             $objet_bien = $this->entityManager->getRepository(bien::class)->findOneById($id);
+
+            // Si l'objet Bien n'existe pas, supprime le bien du panier et passe à l'itération suivante
             if (!$objet_bien){
                 $this->remove($id,$session);
                 continue;
             }
+
+            // Ajoute le bien et sa quantité au tableau $cartComplete
             $cartComplete[] = [
                 'bien' => $objet_bien,
                 'quantity' => $quantity
             ];
         }
 
+        // Initialise une chaîne de caractères qui va contenir la liste des biens du panier
         $cartString = "";
+
+        // Pour chaque bien du panier, ajoute sa quantité et son intitulé à la chaîne de caractères $cartString
         foreach ($cartComplete as $item) {
             $bien = $item['bien'];
             $quantity = $item['quantity'];
             $cartString .= $bien->getIntitule() . " x " . $quantity . "\n<br>" ;
         }
 
+        // Affiche la vue Twig cart/index.html.twig en lui passant en argument le panier complet
         return $this->render('cart/index.html.twig', [
             'cart' => $cartComplete
         ]);
